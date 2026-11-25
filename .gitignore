@@ -55,6 +55,7 @@ Thumbs.db
 /assets/*
 !/assets/report.html
 !/assets/workflow-design-en.svg
+!/assets/workflow-design-zh.svg
 !/references/
 /references/*
 !/references/analysis-guide.md

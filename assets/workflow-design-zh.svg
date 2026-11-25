@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="328" viewBox="0 0 580 328" xml:lang="zh-CN" role="img" aria-labelledby="title desc">
+  <title id="title">paper2flow 如何生成报告并回答问题</title>
+  <desc id="desc">沿左列向下阅读，再向右进入双语报告。右列展示每个节点的问题和对话历史如何交给本机 Codex CLI，结合原始 PDF 作答并将答案返回报告。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#436660"/>
+    </marker>
+  </defs>
+  <rect width="580" height="328" rx="12" fill="#fafcfb"/>
+  <g fill="none" stroke="#436660" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M128 63v28"/><path d="M128 147v28"/><path d="M128 231v28"/>
+    <path d="M240 288h72"/><path d="M428 260v-28"/><path d="M428 176v-28"/>
+    <path d="M540 120h24v168h-22"/>
+  </g>
+  <g fill="#fff" stroke="#83a29b">
+    <rect x="16" y="8" width="224" height="55" rx="8"/>
+    <rect x="16" y="92" width="224" height="55" rx="8"/>
+    <rect x="16" y="176" width="224" height="55" rx="8"/>
+    <rect x="16" y="260" width="224" height="55" rx="8"/>
+    <rect x="316" y="260" width="224" height="55" rx="8" fill="#d9eee8"/>
+    <rect x="316" y="176" width="224" height="55" rx="8"/>
+    <rect x="316" y="92" width="224" height="55" rx="8"/>
+  </g>
+  <g text-anchor="middle" font-family="Noto Sans CJK SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#183b33">
+    <text x="128" y="41">原始论文</text>
+    <text x="128" y="125">Codex 重建研究方法</text>
+    <text x="128" y="199">结构化工作流<tspan x="128" dy="20">关联原文证据</tspan></text>
+    <text x="128" y="293">校验与渲染</text>
+    <text x="428" y="293">双语交互报告</text>
+    <text x="428" y="199">节点问题<tspan x="428" dy="20">与对话历史</tspan></text>
+    <text x="428" y="115">本机 Codex CLI<tspan x="428" dy="20">结合原始 PDF 作答</tspan></text>
+  </g>
+</svg>

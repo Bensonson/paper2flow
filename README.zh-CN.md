@@ -25,16 +25,7 @@
 
 ## 工作流设计
 
-```mermaid
-flowchart LR
-    A[原始论文] --> B[Codex：重建方法]
-    B --> C[带原文证据的结构化工作流]
-    C --> D[校验与渲染]
-    D --> E[双语交互报告]
-    E --> F[节点问题与对话历史]
-    F --> G[携带原始 PDF 的本机 Codex CLI]
-    G --> E
-```
+![Codex 根据原文重建研究方法，关联证据并生成双语报告。针对某一步的提问连同对话历史交给本机 Codex CLI，回答依据原始 PDF 并返回报告。](assets/workflow-design-zh.svg)
 
 项目结合了四项科研 Agent 工程能力：
 
