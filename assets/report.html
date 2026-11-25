@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title></title>
+  <style>
+    :root{--paper:#f5f3ed;--surface:#fffef9;--surface-2:#eeece5;--ink:#232d2c;--muted:#697370;--line:#dedfd6;--accent:#306f67;--accent-soft:#e5efea;--upstream:#65869a;--downstream:#a9804d;--shadow:0 12px 35px #26382d09;--dot:#b9c2b544;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--paper);font-size:15px;line-height:1.6;color-scheme:light}
+    :root[data-theme="dark"]{--paper:#182321;--surface:#202d2a;--surface-2:#283633;--ink:#e3e9df;--muted:#acb9b1;--line:#3c4c46;--accent:#a0cfbb;--accent-soft:#2b4840;--upstream:#a0bfd0;--downstream:#d8b47f;--shadow:0 12px 35px #0002;--dot:#a4c4af1a;color-scheme:dark}
+    *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select{cursor:pointer}button{color:inherit}button:disabled{cursor:default;opacity:.45}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}button{touch-action:manipulation}a{color:var(--accent)}[hidden]{display:none!important}.skip-link{position:fixed;top:-100px;left:20px;z-index:20;background:var(--surface);padding:12px}.skip-link:focus{top:12px}
+    .shell{max-width:1720px;margin:auto;padding:32px 36px 24px}.masthead{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:32px}.brand{font-size:12px;font-weight:650;letter-spacing:.13em;text-transform:uppercase;display:flex;align-items:center;gap:11px}.brand-mark{width:22px;height:22px;border:1px solid var(--accent);border-radius:6px;display:grid;place-items:center;transform:rotate(-8deg);color:var(--accent)}.brand-mark span{transform:rotate(8deg)}.utilities{display:flex;flex-wrap:wrap;gap:8px}.button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:12px;font-weight:550;white-space:nowrap}.button:hover{border-color:var(--accent);background:var(--accent-soft)}.button.quiet{background:transparent}.hero{max-width:1120px;padding-bottom:28px}.eyebrow{color:var(--accent);font-size:11px;letter-spacing:.13em;font-weight:650;text-transform:uppercase;margin:0 0 12px}.hero h1{font-size:clamp(26px,3vw,42px);line-height:1.22;letter-spacing:-.035em;font-weight:600;margin:0 0 16px;overflow-wrap:anywhere}.summary{max-width:900px;color:var(--muted);margin:0 0 18px;white-space:pre-wrap}.metadata{display:flex;align-items:center;flex-wrap:wrap;gap:10px 22px;font-size:12px;color:var(--muted)}.metadata strong{font-weight:600;color:var(--ink)}.metadata .meta-label{margin-right:7px}.workspace{display:grid;grid-template-columns:228px minmax(350px,1fr) 320px;align-items:stretch;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);min-height:660px}.step-sidebar{border-right:1px solid var(--line);padding:20px 14px;min-width:0}.panel-title{margin:0;font-size:12px;letter-spacing:.04em;font-weight:650}.search-wrap{margin:16px 0 12px}.search-label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px}.search-input{width:100%;min-height:38px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink);font-size:12px}.search-input::placeholder{color:var(--muted);opacity:1}.search-status{font-size:11px;color:var(--muted);margin:0 0 12px;min-height:18px}.step-list{display:flex;flex-direction:column;gap:4px;max-height:660px;overflow:auto;padding:3px}.step-item{width:100%;text-align:left;border:1px solid transparent;border-radius:8px;padding:10px 9px;background:transparent;display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px}.step-item:hover{background:var(--paper)}.step-item[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}.step-number{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}.step-item-label{font-size:12px;line-height:1.55;overflow-wrap:anywhere}.empty-list{font-size:12px;color:var(--muted);padding:8px}.graph-panel{display:flex;flex-direction:column;min-width:0;position:relative}.graph-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.graph-title-group{display:flex;align-items:baseline;gap:10px}.graph-count{font-size:10px;color:var(--muted)}.filter-label{font-size:11px;color:var(--muted);display:flex;gap:7px;align-items:center}.graph-filter{max-width:180px;border:1px solid var(--line);padding:5px 7px;border-radius:6px;background:var(--surface);color:var(--ink);font-size:11px}.graph-viewport{position:relative;min-height:530px;flex:1;overflow:hidden;touch-action:none;background-image:radial-gradient(var(--dot) .8px,transparent .8px);background-size:17px 17px;cursor:grab;isolation:isolate}.graph-viewport.dragging{cursor:grabbing}.graph-stage{position:absolute;left:0;top:0;transform-origin:0 0}.edge-layer{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}.edge{fill:none;stroke:var(--muted);stroke-width:1.25;opacity:.52}.edge.inferred{stroke-dasharray:5 4}.edge.is-upstream{stroke:var(--upstream);stroke-width:2;opacity:1}.edge.is-downstream{stroke:var(--downstream);stroke-width:2;opacity:1}.edge.is-muted{opacity:.12}.edge-arrow{fill:var(--muted)}.edge-arrow.is-upstream{fill:var(--upstream)}.edge-arrow.is-downstream{fill:var(--downstream)}.graph-node{position:absolute;width:224px;min-height:96px;padding:14px 15px;text-align:left;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:0 3px 8px #192b2510;cursor:pointer;color:var(--ink);transition:opacity .15s,border-color .15s}.graph-node:hover{border-color:var(--accent);box-shadow:0 4px 16px #192b251c}.graph-node.is-selected{border:2px solid var(--accent);padding:13px 14px;background:var(--accent-soft)}.graph-node.is-upstream{border-left:3px solid var(--upstream);padding-left:13px}.graph-node.is-downstream{border-left:3px solid var(--downstream);padding-left:13px}.graph-node.is-muted,.graph-node.search-dim{opacity:.3}.node-topline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;color:var(--muted);font-size:10px}.node-id{overflow-wrap:anywhere}.node-tag{white-space:nowrap;font-size:9px;border:1px solid var(--line);border-radius:4px;padding:0 4px}.node-name{display:block;font-size:13px;font-weight:600;line-height:1.55;overflow-wrap:anywhere;white-space:normal}.node-evidence{display:block;font-size:10px;color:var(--muted);margin-top:8px}.graph-empty{position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:var(--muted);padding:30px;font-size:13px;pointer-events:none}.graph-controls{position:absolute;bottom:18px;left:18px;display:flex;align-items:center;gap:1px;padding:3px;border:1px solid var(--line);border-radius:9px;background:var(--surface);box-shadow:var(--shadow)}.graph-controls .button{border:0;background:transparent;min-width:32px;padding:4px 9px;min-height:32px}.graph-controls .button:hover{background:var(--accent-soft)}.zoom-label{font-size:10px;min-width:42px;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums}.graph-footer{padding:12px 20px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.legend{display:flex;gap:13px;flex-wrap:wrap}.legend-item{display:inline-flex;align-items:center;gap:6px}.legend-line{display:inline-block;width:20px;border-top:1px solid var(--muted)}.legend-line.dashed{border-top-style:dashed}.detail-panel{border-left:1px solid var(--line);padding:20px;max-height:830px;overflow:auto;min-width:0;scrollbar-gutter:stable}.detail-header{padding-bottom:19px;border-bottom:1px solid var(--line);margin-bottom:20px}.detail-kicker{font-size:10px;letter-spacing:.05em;color:var(--accent);margin:0 0 8px;overflow-wrap:anywhere}.detail-title{font-size:20px;line-height:1.4;letter-spacing:-.02em;font-weight:600;margin:0;overflow-wrap:anywhere}.detail-section{margin-top:20px}.detail-section h3{font-size:10px;font-weight:650;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin:0 0 8px}.detail-section p,.detail-section ul,.detail-section dl{font-size:12px;line-height:1.75;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.detail-section ul{padding-left:18px}.detail-section li+li{margin-top:4px}.detail-section dl{display:grid;grid-template-columns:minmax(65px,.8fr) minmax(0,1.2fr);gap:5px 10px}.detail-section dt{color:var(--muted)}.detail-section dd{margin:0}.detail-section .unreported{color:var(--muted);font-style:italic}.flow-pair{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px}.flow-pair .detail-section{margin:0}.evidence-card,.dependency-card{padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);margin-top:8px}.evidence-location{font-size:10px;color:var(--accent);margin:0 0 7px;overflow-wrap:anywhere}.evidence-quote{font-size:12px;line-height:1.7;margin:0;border-left:2px solid var(--line);padding-left:10px;white-space:pre-wrap;overflow-wrap:anywhere}.dependency-top{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;margin-bottom:7px}.dependency-link{border:0;padding:0;background:none;text-align:left;text-decoration:underline;text-underline-offset:3px;color:var(--accent);font-size:11px;line-height:1.5;overflow-wrap:anywhere}.basis-tag{display:inline-block;font-size:9px;border:1px solid var(--line);border-radius:4px;padding:1px 5px;white-space:nowrap;color:var(--muted)}.basis-tag.inferred{border-style:dashed}.dependency-reason{font-size:11px;line-height:1.7;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.dependency-card .evidence-card{padding:9px;background:var(--surface)}.dependency-card .evidence-quote{font-size:11px}.dependency-card .evidence-location{font-size:9px}.detail-empty{color:var(--muted);font-size:12px;margin-top:12px}.notes{margin-top:23px;border-top:1px solid var(--line);padding-top:18px;max-width:1000px}.notes h2{font-size:11px;color:var(--muted);font-weight:600;margin:0 0 7px}.notes ul{font-size:12px;color:var(--muted);padding-left:18px;margin:0}.notes li+li{margin-top:4px}.report-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:24px;font-size:10px;color:var(--muted)}.error-box{border:1px solid var(--line);background:var(--surface);padding:28px;border-radius:12px;max-width:800px;margin:25px 0}.error-box h2{font-size:20px;margin:0 0 8px}.error-box p{color:var(--muted);font-size:13px;overflow-wrap:anywhere}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.print-steps{display:none}
+    @media(min-width:1550px){.workspace{grid-template-columns:248px minmax(420px,1fr) 350px}.graph-viewport{min-height:610px}.detail-panel{max-height:910px}.step-list{max-height:740px}}
+    @media(max-width:1170px){.shell{padding:24px}.workspace{grid-template-columns:190px minmax(300px,1fr)}.detail-panel{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);max-height:none;display:grid;grid-template-columns:1fr 1fr;column-gap:28px}.detail-header{grid-column:1/-1}.detail-panel>.detail-section,.detail-panel>.flow-pair{margin:0 0 24px}.detail-panel>.detail-empty{grid-column:1/-1}.graph-viewport{min-height:500px}.step-list{max-height:500px}}
+    @media(max-width:680px){.shell{padding:18px 14px}.masthead{align-items:flex-start;gap:12px;margin-bottom:26px}.brand{font-size:10px;letter-spacing:.05em;padding-top:6px}.utilities{gap:5px;justify-content:flex-end}.utilities .button{font-size:10px;padding:6px 8px;min-height:32px}.utilities .export-button{display:none}.hero{padding-bottom:23px}.hero h1{font-size:26px}.summary{font-size:13px}.metadata{font-size:10px;gap:6px 14px}.workspace{display:flex;flex-direction:column;border-radius:10px;min-height:0}.step-sidebar{padding:13px;border-right:0;border-bottom:1px solid var(--line)}.step-sidebar>.panel-title{display:none}.search-wrap{margin:0 0 7px}.search-label{display:none}.search-status{margin:0 0 6px;min-height:0}.step-list{max-height:145px;display:grid;grid-template-columns:1fr 1fr;gap:3px}.step-item{padding:7px;gap:5px;grid-template-columns:20px minmax(0,1fr)}.step-item-label{font-size:11px}.graph-heading{padding:12px}.graph-title-group{gap:7px}.graph-filter{max-width:155px;font-size:10px}.filter-label{font-size:0;gap:0}.graph-viewport{height:470px;min-height:470px;flex:none}.graph-footer{padding:10px 12px}.graph-hint{display:none}.detail-panel{display:block;padding:18px}.detail-panel>.detail-section,.detail-panel>.flow-pair{margin-top:22px}.detail-title{font-size:22px}.detail-header{margin-bottom:0}.graph-controls{bottom:12px;left:12px}.report-footer{font-size:9px}.notes{margin-top:19px}}
+    .graph-node.is-muted{opacity:.58}.graph-node.search-dim{opacity:.3}.empty-list{grid-column:1/-1}
+    .agent-drawer{position:fixed;z-index:30;right:20px;top:20px;bottom:20px;width:420px;max-width:calc(100vw - 28px);padding:24px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:0 18px 90px #122d2530;overflow:auto;scrollbar-gutter:stable}.agent-drawer-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.agent-drawer h2{margin:0;font-size:22px;line-height:1.35;letter-spacing:-.02em}.agent-drawer h3{margin:0 0 10px;font-size:13px}.agent-close{min-width:32px;padding:3px;font-size:19px}.agent-context{padding:12px;margin:18px 0;background:var(--accent-soft);border:1px solid var(--line);border-radius:8px;font-size:12px;line-height:1.7;overflow-wrap:anywhere}.agent-caption,.agent-status,.agent-hint{font-size:11px;color:var(--muted);line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}.agent-caption{margin:10px 0 18px}.agent-section{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.agent-section summary{font-size:12px;font-weight:600;cursor:pointer}.agent-field{display:flex;flex-direction:column;gap:6px;margin:13px 0;font-size:11px;font-weight:550}.agent-field input,.agent-field textarea{min-width:0;width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink);font-size:12px;font-weight:400}.agent-field textarea{resize:vertical;min-height:110px;line-height:1.6}.agent-field input[type="file"]{padding:8px;font-size:10px}.agent-field input[type="file"]::file-selector-button{border:1px solid var(--line);border-radius:4px;padding:4px 7px;margin-right:8px;background:var(--surface);color:var(--ink)}.agent-source-options{display:flex;gap:18px;font-size:12px;margin:12px 0}.agent-source-options label{display:flex;align-items:center;gap:5px;cursor:pointer}.agent-source-options input{accent-color:var(--accent)}.agent-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.agent-actions .button{font-size:11px}.agent-submit{background:var(--accent);color:var(--surface);border-color:var(--accent)}.agent-submit:hover{color:var(--ink)}.agent-status{margin:10px 0 0;min-height:19px}.agent-status[data-state="error"]{color:var(--downstream)}.agent-answer{margin-top:20px;padding:16px;border:1px solid var(--line);border-radius:9px;background:var(--paper)}.agent-answer-context{font-size:10px;color:var(--accent);white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 12px}.agent-answer-text{font-family:inherit;font-size:12px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}.agent-command{display:block;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:10px;line-height:1.8;padding:10px;background:var(--paper);border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:10px}.agent-help summary{font-size:11px;font-weight:400;color:var(--muted)}
+    @media(max-width:680px){.graph-hint{display:block}}
+    @media(max-width:680px){.agent-drawer{right:14px;top:14px;bottom:14px;padding:20px}.agent-drawer h2{font-size:21px}}
+    @media print{.agent-drawer{display:none!important}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+    @media print{:root,:root[data-theme="dark"]{--paper:#fff;--surface:#fff;--surface-2:#f5f5f2;--ink:#182723;--muted:#55615b;--line:#d7ddd5;--accent:#306f67;--accent-soft:#eef5f0;--upstream:#426b82;--downstream:#8b693c;--shadow:none;--dot:transparent;color-scheme:light}body{background:#fff}.shell{padding:0;max-width:none}.masthead{margin-bottom:22px}.utilities,.step-sidebar,.detail-panel,.graph-controls,.filter-label,.graph-hint,.skip-link{display:none!important}.hero h1{font-size:26px}.hero{padding-bottom:20px}.workspace{display:block;min-height:0;overflow:hidden;break-inside:avoid;border-radius:6px}.graph-heading{padding:10px 14px}.graph-viewport{height:360px;min-height:360px;background:none}.graph-footer{font-size:9px}.graph-node{box-shadow:none}.print-steps{display:block}.print-step{break-inside:avoid;border-top:1px solid var(--line);margin-top:24px;padding-top:18px}.print-step h2{font-size:18px;line-height:1.4;margin:0 0 12px}.print-step .flow-pair{gap:25px}.print-step .detail-section{margin-top:14px}.print-step .evidence-card,.print-step .dependency-card{break-inside:avoid}.report-footer{margin-top:20px}.notes{break-inside:avoid}.graph-node.is-muted,.graph-node.search-dim{opacity:1}.summary{font-size:12px}.hero,.metadata,.notes{max-width:none}@page{size:A4 landscape;margin:16mm}}
+
+    /* The canvas is an interaction surface; evidence text outside it remains selectable. */
+    .graph-viewport,.graph-viewport *{-webkit-user-select:none;user-select:none}
+    .graph-viewport{overscroll-behavior:contain}
+
+    .lineage-strip{position:absolute;left:10px;right:10px;top:0;height:3px;border-radius:0 0 3px 3px;pointer-events:none}
+    .lineage-legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:10px 20px;color:var(--muted);font-size:10px;border-top:1px solid var(--line)}
+    .lineage-legend span{display:inline-flex;align-items:center;gap:6px}
+    .lineage-legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+    .edge{stroke-width:1.8;opacity:.8}.edge.is-upstream,.edge.is-downstream{stroke-width:2.6}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#graph-viewport" data-i18n="skip">Skip to dependency map</a>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><span>↗</span></span><span data-i18n="brand">Research · Paths</span></div>
+      <nav class="utilities" aria-label="报告操作" id="utilities">
+        <button class="button" id="agent-open" type="button" aria-expanded="false" aria-controls="agent-drawer" data-i18n="agentOpen">Ask Codex</button>
+        <button class="button quiet" id="language-button" type="button">中文</button>
+        <button class="button quiet" id="theme-button" type="button">Dark</button>
+        <button class="button export-button" id="download-button" type="button" data-i18n="download">Export JSON</button>
+        <button class="button" id="print-button" type="button" data-i18n="print">Print / PDF</button>
+      </nav>
+    </header>
+    <section class="hero" aria-labelledby="paper-title">
+      <p class="eyebrow" data-i18n="eyebrow">Paper methods · Dependency map</p>
+      <h1 id="paper-title"></h1>
+    <p class="summary" id="paper-summary"></p>
+    <p class="agent-caption" id="content-language-status" hidden></p>
+      <div class="metadata" id="metadata"></div>
+    </section>
+    <div class="error-box" id="error-box" role="alert" hidden><h2 id="error-title"></h2><p id="error-message"></p></div>
+    <section class="workspace" id="workspace" aria-label="步骤依赖浏览器">
+      <aside class="step-sidebar" aria-labelledby="steps-heading">
+        <h2 class="panel-title" id="steps-heading" data-i18n="steps">Research steps</h2>
+        <div class="search-wrap"><label class="search-label" for="search-input" data-i18n="searchLabel">Search steps and content</label><input type="search" class="search-input" id="search-input" autocomplete="off" spellcheck="false"></div>
+        <p class="search-status" id="search-status" aria-live="polite"></p>
+        <div class="step-list" id="step-list"></div>
+      </aside>
+      <section class="graph-panel" aria-labelledby="graph-heading">
+        <div class="graph-heading">
+          <div class="graph-title-group"><h2 class="panel-title" id="graph-heading" data-i18n="graph">Dependency map</h2><span class="graph-count" id="graph-count"></span></div>
+          <label class="filter-label"><span data-i18n="view">View</span><select class="graph-filter" id="graph-filter"><option value="all" data-i18n="all">All steps</option><option value="ancestors" data-i18n="ancestors">Selected step + upstream</option><option value="descendants" data-i18n="descendants">Selected step + downstream</option></select></label>
+        </div>
+        <p class="sr-only" id="graph-description" data-i18n="graphDescription">An arrow A → B means B depends on A. Select a node for evidence and dependency explanations. Drag empty space to pan, scroll gently to zoom, and use a horizontal wheel or Shift + wheel to pan horizontally. Keyboard: + and − to zoom, arrow keys to pan, 0 to fit.</p>
+        <div class="graph-viewport" id="graph-viewport" tabindex="0" role="group" aria-describedby="graph-description">
+          <div class="graph-stage" id="graph-stage"><svg class="edge-layer" id="edge-layer" aria-hidden="true"></svg><div id="node-layer"></div></div>
+          <div class="graph-empty" id="graph-empty" hidden></div>
+          <div class="graph-controls" id="graph-controls"><button class="button" id="zoom-out" type="button">−</button><span class="zoom-label" id="zoom-label">100%</span><button class="button" id="zoom-in" type="button">+</button><button class="button" id="fit-button" type="button" data-i18n="fit">Fit</button></div>
+        </div>
+        <div class="graph-footer"><div class="legend"><span class="legend-item"><i class="legend-line" aria-hidden="true"></i><span data-i18n="explicit">Explicit in source</span></span><span class="legend-item"><i class="legend-line dashed" aria-hidden="true"></i><span data-i18n="inferred">Inferred</span></span><span data-i18n="arrowMeaning">A → B: B depends on A</span></div><span class="graph-hint" data-i18n="graphHint">Drag to pan · Wheel gently zooms · Horizontal wheel or Shift + wheel pans</span></div>
+      </section>
+      <aside class="detail-panel" id="detail-panel" aria-label="步骤详情"></aside>
+    </section>
+    <section class="notes" id="notes" hidden><h2 data-i18n="notes">Reading notes & uncertainty</h2><ul id="notes-list"></ul></section>
+    <section class="print-steps" id="print-steps" aria-label="全部步骤详情"></section>
+    <footer class="report-footer"><span data-i18n="footer">Grounded in the source · Inferred relations are marked</span><span data-i18n="offline">Offline report · Content is stored in this file</span></footer>
+    <div class="sr-only" id="selection-status" aria-live="polite"></div>
+  </main>
+  <aside class="agent-drawer" id="agent-drawer" role="dialog" aria-modal="false" aria-labelledby="agent-heading" hidden>
+    <header class="agent-drawer-header"><div><p class="eyebrow" data-i18n="agentEyebrow">Source · Step · Question</p><h2 id="agent-heading" data-i18n="agentHeading">Ask about this step</h2></div><button class="button agent-close" id="agent-close" type="button" aria-label="关闭">×</button></header>
+    <p class="agent-caption" data-i18n="agentIntro">Ask local Codex using the bound original PDF. Use Follow up to include previous exchanges for the same step.</p>
+    <p class="agent-context" id="agent-node-context"></p>
+    <details class="agent-section" open>
+      <summary data-i18n="agentConnection">Connect local Codex</summary>
+      <label class="agent-field"><span data-i18n="agentURL">Local bridge address</span><input id="agent-url" type="url" value="http://127.0.0.1:8765" autocomplete="off" spellcheck="false"></label>
+      <label class="agent-field"><span data-i18n="agentToken">Connection token (advanced fallback)</span><input id="agent-token" type="password" autocomplete="off" spellcheck="false"></label>
+      <button class="button" id="agent-connect" type="button" data-i18n="agentConnect">Connect</button>
+      <p class="agent-status" id="agent-connection-status" role="status" aria-live="polite"></p>
+      <details class="agent-help"><summary data-i18n="agentStartup">Start the local bridge</summary><p class="agent-hint" data-i18n="agentStartupHint">Open this report with OPEN_REPORT.cmd to start the local bridge and connect automatically. Manual connection is an advanced fallback.</p><code class="agent-command">python3 scripts/agent_bridge.py --agent codex --port 8765</code><p class="agent-hint" data-i18n="agentPrivacy">Only HTTP loopback addresses are accepted. The token stays in page memory and is excluded from reports and exports.</p></details>
+    </details>
+    <form class="agent-section" id="agent-form">
+      <h3 data-i18n="agentPDF">Original paper PDF</h3>
+      <p class="agent-hint" id="agent-pdf-binding"></p>
+      <details class="agent-help" id="agent-bound-details" hidden><summary data-i18n="agentBoundDetails">View original PDF path</summary><code class="agent-command" id="agent-bound-path"></code></details>
+      <button class="button" id="agent-relocate" type="button" hidden data-i18n="agentRelocate">Locate original PDF</button>
+      <div id="agent-relocation" hidden>
+      <div class="agent-source-options"><label><input type="radio" name="agent-pdf-mode" value="path" checked><span data-i18n="agentPDFPathMode">Absolute path</span></label><label><input type="radio" name="agent-pdf-mode" value="file"><span data-i18n="agentPDFFileMode">Choose file</span></label></div>
+      <label class="agent-field" id="agent-path-field"><span data-i18n="agentPDFPath">Absolute PDF path on the computer running the bridge</span><input id="agent-pdf-path" type="text" placeholder="/absolute/path/paper.pdf" autocomplete="off" spellcheck="false"></label>
+      <label class="agent-field" id="agent-file-field" hidden><span data-i18n="agentPDFFile">Original paper PDF (up to 25 MB)</span><input id="agent-pdf-file" type="file" accept=".pdf,application/pdf"></label>
+      <button class="button" id="agent-bind-pdf" type="button" disabled data-i18n="agentBindPDF">Use this PDF</button>
+      </div>
+      <p class="agent-hint" data-i18n="agentPDFHint">Each question automatically includes the bound original PDF. The bridge checks its source fingerprint when available; no repeated file selection is needed.</p>
+      <label class="agent-field"><span data-i18n="agentQuestion">Question about the selected step</span><textarea id="agent-question" rows="4" required></textarea></label>
+      <div class="agent-actions"><button class="button agent-submit" id="agent-send" type="submit" disabled data-i18n="agentSend">Ask Codex</button><button class="button" id="agent-followup" type="button" disabled>Follow up</button><button class="button" id="agent-export" type="button" disabled data-i18n="agentExport">Export Codex request</button></div>
+      <p class="agent-hint" id="agent-form-hint"></p>
+    </form>
+    <p class="agent-status" id="agent-job-status" role="status" aria-live="polite"></p>
+    <section class="agent-answer" id="agent-answer" hidden><h3 data-i18n="agentAnswer">Codex answer</h3><p class="agent-answer-context" id="agent-answer-context"></p><pre class="agent-answer-text" id="agent-answer-text"></pre></section>
+  </aside>
+  <script type="application/json" id="workflow-data">__WORKFLOW_DATA__</script>
+  <script type="application/json" id="report-language">__REPORT_LANGUAGE__</script>
+  <script type="application/json" id="workflow-localizations">__WORKFLOW_LOCALIZATIONS__</script>
+  <script>
+    'use strict';
+    (() => {
+      const translations = {
+        zh:{skip:'跳到依赖图',brand:'研究 · 路径',eyebrow:'论文方法 · 依赖地图',download:'导出 JSON',print:'打印 / PDF',steps:'研究步骤',searchLabel:'搜索步骤与内容',searchPlaceholder:'搜索名称、方法、发现…',graph:'依赖地图',view:'查看',all:'全部步骤',ancestors:'所选步骤与上游',descendants:'所选步骤与下游',graphDescription:'箭头 A → B 表示步骤 B 依赖步骤 A。选择节点查看证据与依赖解释。拖动空白处平移，滚轮缓慢缩放，横滚轮或 Shift + 滚轮横移；键盘加减号缩放，方向键平移，0 键适应画布。',fit:'适应',explicit:'原文明确',inferred:'分析推断',arrowMeaning:'A → B：B 依赖 A',graphHint:'拖动平移 · 滚轮缓慢缩放 · 横滚轮或 Shift + 滚轮横移',notes:'阅读说明与不确定性',footer:'依据原文梳理 · 推断关系单独标记',offline:'离线交互报告 · 内容保存在此文件中',light:'浅色',dark:'深色',source:'来源',pages:'页',stepCount:'个步骤',relationCount:'条依赖',noMatches:'没有匹配的步骤。请尝试其他关键词。',noSteps:'这份报告尚未包含研究步骤。',searchResults:'个匹配',selectStep:'选择步骤，查看其任务、产物与原文证据。',task:'任务',inputs:'输入',outputs:'输出',findings:'发现',parameters:'参数',algorithm:'算法 / 方法',software:'软件 / 工具',evidence:'原文证据',dependencies:'前置依赖',notReported:'原文未提供 / 尚未提取',noDependencies:'无前置依赖',reasonMissing:'尚未提供依赖解释；暂按推断关系标记。',page:'第 {n} 页',pageUnknown:'页码未记录',sectionUnknown:'章节未记录',evidenceCount:'{n} 条证据',root:'起点',terminal:'终点',selected:'已选择：',errorTitle:'无法显示依赖图',errorMessage:'报告数据无法读取。请重新生成 HTML，并检查工作流 JSON。',cycleError:'步骤依赖中存在循环，无法按研究流程分层。请检查工作流 JSON。',missingError:'步骤依赖引用了不存在的 ID，或包含重复、空白 ID。请检查工作流 JSON。',schemaError:'报告需要 schema_version 1.0 和有效的 steps 数组。',utilities:'报告操作',workspace:'步骤依赖浏览器',details:'步骤详情',zoomIn:'放大',zoomOut:'缩小',noTitle:'未命名论文',sourceUnknown:'未记录来源',allDetails:'全部步骤详情',documentHash:'源文件 SHA-256',missingPaperSummary:'尚未提供论文概述。',selectionReset:'已显示全部步骤。',searchCleared:'搜索已清除。'},
+        en:{skip:'Skip to dependency map',brand:'Research · Paths',eyebrow:'Paper methods · Dependency map',download:'Export JSON',print:'Print / PDF',steps:'Research steps',searchLabel:'Search steps and content',searchPlaceholder:'Search methods, findings…',graph:'Dependency map',view:'View',all:'All steps',ancestors:'Selected step + upstream',descendants:'Selected step + downstream',graphDescription:'An arrow A → B means B depends on A. Select a node for evidence and dependency explanations. Drag empty space to pan, scroll gently to zoom, and use a horizontal wheel or Shift + wheel to pan horizontally. Keyboard: + and − to zoom, arrow keys to pan, 0 to fit.',fit:'Fit',explicit:'Explicit in source',inferred:'Inferred',arrowMeaning:'A → B: B depends on A',graphHint:'Drag to pan · Wheel gently zooms · Horizontal wheel or Shift + wheel pans',notes:'Reading notes & uncertainty',footer:'Grounded in the source · Inferred relations are marked',offline:'Offline report · Content is stored in this file',light:'Light',dark:'Dark',source:'Source',pages:'pages',stepCount:'steps',relationCount:'dependencies',noMatches:'No matching steps. Try a different keyword.',noSteps:'This report does not contain any research steps yet.',searchResults:'matches',selectStep:'Select a step to inspect its task, outputs and source evidence.',task:'Task',inputs:'Inputs',outputs:'Outputs',findings:'Findings',parameters:'Parameters',algorithm:'Algorithms / methods',software:'Software / tools',evidence:'Source evidence',dependencies:'Prerequisites',notReported:'Not reported / not yet extracted',noDependencies:'No prerequisites',reasonMissing:'No dependency explanation was provided; marked as inferred.',page:'Page {n}',pageUnknown:'Page not recorded',sectionUnknown:'Section not recorded',evidenceCount:'{n} evidence items',root:'Start',terminal:'End',selected:'Selected: ',errorTitle:'Unable to display the map',errorMessage:'The report data could not be read. Regenerate the HTML and check the workflow JSON.',cycleError:'The dependency graph contains a cycle. Check the workflow JSON before laying out the research flow.',missingError:'A dependency references an unknown ID, or step IDs are blank or duplicated. Check the workflow JSON.',schemaError:'This report requires schema_version 1.0 and a valid steps array.',utilities:'Report actions',workspace:'Research dependency browser',details:'Step details',zoomIn:'Zoom in',zoomOut:'Zoom out',noTitle:'Untitled paper',sourceUnknown:'Source not recorded',allDetails:'All step details',documentHash:'Source SHA-256',missingPaperSummary:'A paper summary has not been provided.',selectionReset:'All steps are visible.',searchCleared:'Search cleared.'}
+      };
+      const agentCopy={
+        zh:{agentOpen:'追问 Codex',agentEyebrow:'原文 · 步骤 · 追问',agentHeading:'针对步骤追问',agentIntro:'连接本机 Codex，根据已绑定的原始论文 PDF 提问。使用“追问”携带同一节点此前的问答。',agentConnection:'连接本机 Codex',agentURL:'本机桥接地址',agentToken:'连接令牌（高级备用配置）',agentConnect:'连接',agentStartup:'启动本机桥接',agentStartupHint:'双击 OPEN_REPORT.cmd，自动启动本机桥接并连接。手动配置仅作高级备用方式。',agentPrivacy:'地址仅允许 HTTP 本机回环。令牌仅保存在本页内存中，不会写入报告或导出的请求。',agentPDF:'原论文 PDF',agentBoundDetails:'查看原 PDF 路径',agentRelocate:'定位原 PDF',agentPDFPathMode:'绝对路径',agentPDFFileMode:'选择文件',agentPDFPath:'桥接所在电脑上的原 PDF 绝对路径',agentPDFFile:'原论文 PDF（最多 25 MB）',agentBindPDF:'使用此 PDF',agentPDFHint:'每次提问自动附带已绑定的原 PDF。桥接会核对来源指纹（如有）；无需重复选择文件。',agentQuestion:'针对当前步骤的问题',agentSend:'向 Codex 提问',agentExport:'导出 Codex 请求',agentAnswer:'Codex 回答',agentClose:'关闭追问面板',agentCurrent:'当前步骤：{name}（{id}）',agentNoNode:'先选择一个研究步骤。',agentDisconnected:'尚未连接。报告浏览与请求导出可离线使用。',agentConnecting:'正在连接本机 Codex…',agentConnected:'已连接本机 Codex。',agentConnectError:'连接失败：{error}',agentConnectHelp:'确认本机桥接已启动，地址和令牌正确。',agentInvalidResponse:'本机桥接返回了无法识别的响应。',agentBound:'已绑定原 PDF：{name}',agentUnbound:'未绑定原 PDF。请定位原论文后再追问。',agentDemoUnbound:'演示未绑定 PDF；定位真实论文的原 PDF 后可追问。',agentFileBound:'已选择原 PDF：{name}（保留在本页内存中）',agentPathHint:'请选择原 PDF，或提供有效的绝对路径。',agentFileHint:'请选择 .pdf 文件，大小不超过 25 MB。',agentQuestionHint:'填写问题后，将自动连同当前节点和已绑定原 PDF 发送。',agentConnectHint:'连接本机 Codex 后可提问；也可离线导出请求。',agentReadyHint:'问题将连同当前节点、完整工作流和原 PDF 一起发送。',agentFileExportHint:'浏览器无法获知所选文件的绝对路径。离线导出请使用路径绑定；在线提问可直接附带此文件。',agentRunning:'正在等待 Codex 返回。已发送步骤：{name}（{id}）。',agentCompleted:'已完成。回答对应发送时的步骤与原 PDF。',agentJobError:'提问失败：{error}',agentTimeout:'等待已超过 330 秒。请检查桥接终端中的任务状态后再试。',agentFileError:'无法读取所选 PDF，请重新定位原文件。',agentEmptyAnswer:'Codex 未返回回答文本。',agentAnswerContext:'提问步骤：{name}（{id}）\n原 PDF：{pdf}',agentPathLost:'原 PDF 路径不可用，请重新定位原文件。'},
+        en:{agentOpen:'Ask Codex',agentEyebrow:'Source · Step · Question',agentHeading:'Ask about this step',agentIntro:'Ask local Codex using the bound original PDF. Use Follow up to include previous exchanges for the same step.',agentConnection:'Connect local Codex',agentURL:'Local bridge address',agentToken:'Connection token (advanced fallback)',agentConnect:'Connect',agentStartup:'Start the local bridge',agentStartupHint:'Open this report with OPEN_REPORT.cmd to start the local bridge and connect automatically. Manual connection is an advanced fallback.',agentPrivacy:'Only HTTP loopback addresses are accepted. The token stays in page memory and is excluded from reports and exports.',agentPDF:'Original paper PDF',agentBoundDetails:'View original PDF path',agentRelocate:'Locate original PDF',agentPDFPathMode:'Absolute path',agentPDFFileMode:'Choose file',agentPDFPath:'Absolute PDF path on the computer running the bridge',agentPDFFile:'Original paper PDF (up to 25 MB)',agentBindPDF:'Use this PDF',agentPDFHint:'Each question automatically includes the bound original PDF. The bridge checks its source fingerprint when available; no repeated file selection is needed.',agentQuestion:'Question about the selected step',agentSend:'Ask Codex',agentExport:'Export Codex request',agentAnswer:'Codex answer',agentClose:'Close question panel',agentCurrent:'Selected step: {name} ({id})',agentNoNode:'Select a research step first.',agentDisconnected:'Not connected. Report browsing and request export work offline.',agentConnecting:'Connecting to local Codex…',agentConnected:'Connected to local Codex.',agentConnectError:'Connection failed: {error}',agentConnectHelp:'Check that the local bridge is running and that its address and token are correct.',agentInvalidResponse:'The local bridge returned an unrecognized response.',agentBound:'Original PDF bound: {name}',agentUnbound:'No original PDF is bound. Locate the source paper before asking.',agentDemoUnbound:'This demo has no bound PDF. Locate a real paper’s original PDF to ask questions.',agentFileBound:'Original PDF selected: {name} (kept in page memory)',agentPathHint:'Choose the original PDF or provide a valid absolute path.',agentFileHint:'Choose a .pdf file no larger than 25 MB.',agentQuestionHint:'Enter a question; its selected step and bound original PDF will be included automatically.',agentConnectHint:'Connect local Codex to ask, or export a request offline.',agentReadyHint:'Your question includes the selected step, complete workflow and original PDF.',agentFileExportHint:'Browsers cannot reveal a selected file’s absolute path. Bind a path to export offline; online questions can attach this file directly.',agentRunning:'Waiting for Codex. Sent step: {name} ({id}).',agentCompleted:'Completed. This answer belongs to the step and PDF captured when sent.',agentJobError:'Question failed: {error}',agentTimeout:'The 330-second wait limit was reached. Check the task in the bridge terminal before retrying.',agentFileError:'Unable to read the selected PDF. Locate the original file again.',agentEmptyAnswer:'Codex returned no answer text.',agentAnswerContext:'Question step: {name} ({id})\nOriginal PDF: {pdf}',agentPathLost:'The original PDF path is unavailable. Locate the source file again.'}
+      };
+      Object.assign(translations.zh,agentCopy.zh,{agentURLHint:'只支持 HTTP 本机回环地址：127.0.0.1、localhost 或 [::1]。'});Object.assign(translations.en,agentCopy.en,{agentURLHint:'Use an HTTP loopback address: 127.0.0.1, localhost or [::1].'});
+      const $ = id => document.getElementById(id);
+      const node = (tag, className, content) => {const result=document.createElement(tag);if(className)result.className=className;if(content!==undefined&&content!==null)result.textContent=String(content);return result;};
+      const svgNode = (tag, attributes) => {const result=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [key,value] of Object.entries(attributes||{}))result.setAttribute(key,String(value));return result;};
+      const strings = value => Array.isArray(value)?value.filter(item=>typeof item==='string'):[];
+      const safeString = value => typeof value==='string'?value:'';
+      let language='en';try{language=JSON.parse($('report-language').textContent)==='zh'?'zh':'en';}catch{}
+      let localizedWorkflows={};
+      const t = (key, values={}) => Object.entries(values).reduce((text,[name,value])=>text.replaceAll('{'+name+'}',String(value)),translations[language][key]||key);
+      let data=null, steps=[], byId=new Map(), parents=new Map(), children=new Map(), ordered=[], selectedId=null, failure=null, query='', filter='all', graphNodes=new Map(), edgeElements=[], graphBounds={width:1,height:1}, transform={x:0,y:0,scale:1};
+      let pdfBinding=null,relocationOpen=false,bridgeConnection=null,connectPhase='idle',connectError='',connectAttempt=0,askPending=false,jobPhase='idle',jobError='',requestSnapshot=null,lastAnswer=null;
+      const ancestorIds = id => walk(id,parents);
+      const descendantIds = id => walk(id,children);
+      function walk(id, relations){const found=new Set();const pending=[...(relations.get(id)||[])];while(pending.length){const next=pending.pop();if(found.has(next))continue;found.add(next);pending.push(...(relations.get(next)||[]));}return found;}
+      function reasonFor(step,parentId){return (Array.isArray(step.dependency_reasons)?step.dependency_reasons:[]).find(reason=>reason&&reason.step_id===parentId);}
+      function edgeBasis(step,parentId){return reasonFor(step,parentId)?.basis==='explicit'?'explicit':'inferred';}
+      function compare(a,b){return a<b?-1:a>b?1:0;}
+      function validate(){
+        if(!data||data.schema_version!=='1.0'||!Array.isArray(data.steps))throw new Error('schemaError');
+        steps=data.steps;
+        for(const step of steps){if(!step||typeof step.id!=='string'||!step.id.trim()||byId.has(step.id)||typeof step.name!=='string'||!Array.isArray(step.depends_on)||step.depends_on.some(id=>typeof id!=='string'))throw new Error('missingError');byId.set(step.id,step);children.set(step.id,[]);}
+        for(const step of steps){const ids=[...new Set(step.depends_on)];if(ids.some(id=>!byId.has(id)))throw new Error('missingError');parents.set(step.id,ids);for(const id of ids)children.get(id).push(step.id);}
+        const degree=new Map(steps.map(step=>[step.id,parents.get(step.id).length]));const queue=steps.filter(step=>!degree.get(step.id)).map(step=>step.id).sort(compare);
+        while(queue.length){const id=queue.shift();ordered.push(id);for(const child of children.get(id)){degree.set(child,degree.get(child)-1);if(!degree.get(child)){queue.push(child);queue.sort(compare);}}}
+        if(ordered.length!==steps.length)throw new Error('cycleError');
+        selectedId=ordered[0]||null;
+        if(isPDFPath(data.source?.pdf_path))pdfBinding={kind:'path',path:data.source.pdf_path,name:safeString(data.source.name)||pdfName(data.source.pdf_path)};
+      }
+      function applyLanguage(){
+        if(localizedWorkflows[language]){data=localizedWorkflows[language];steps=data.steps;byId=new Map(steps.map(step=>[step.id,step]));}
+        document.documentElement.lang=language;
+        for(const element of document.querySelectorAll('[data-i18n]'))element.textContent=t(element.dataset.i18n);
+        const alternative=language==='zh'?'en':'zh',available=!!localizedWorkflows[alternative];
+        $('language-button').disabled=!available;
+        $('language-button').textContent=available?(alternative==='en'?'English':'中文'):(language==='en'?'Chinese unavailable':'英文内容不可用');
+        $('language-button').title=available?'':(language==='en'?'A full Chinese content translation has not been supplied.':'尚未提供完整英文内容。');
+        $('content-language-status').hidden=available;
+        $('content-language-status').textContent=available?'':(language==='en'?'English source draft. A full Chinese content translation is not available.':'尚未提供完整的另一语言译稿。');
+        $('search-input').placeholder=t('searchPlaceholder');$('utilities').setAttribute('aria-label',t('utilities'));$('workspace').setAttribute('aria-label',t('workspace'));$('detail-panel').setAttribute('aria-label',t('details'));$('print-steps').setAttribute('aria-label',t('allDetails'));$('graph-viewport').setAttribute('aria-label',t('graph'));$('zoom-in').setAttribute('aria-label',t('zoomIn'));$('zoom-out').setAttribute('aria-label',t('zoomOut'));$('fit-button').setAttribute('aria-label',t('fit'));$('agent-close').setAttribute('aria-label',t('agentClose'));updateThemeLabel();updateAgentUI();
+      }
+      function updateThemeLabel(){$('theme-button').textContent=document.documentElement.dataset.theme==='dark'?t('light'):t('dark');}
+      function setTheme(theme){document.documentElement.dataset.theme=theme;try{localStorage.setItem('paper2flow-theme',theme);}catch{}updateThemeLabel();}
+      function renderMetadata(){
+        const title=safeString(data?.paper_title)||t('noTitle');$('paper-title').textContent=title;document.title=title+' · '+t('graph');$('paper-summary').textContent=safeString(data?.summary)||t('missingPaperSummary');
+        const source=data?.source||{},metadata=$('metadata');metadata.replaceChildren();const sourcePart=node('span');sourcePart.append(node('span','meta-label',t('source')),node('strong','',safeString(source.name)||t('sourceUnknown')));metadata.append(sourcePart);
+        if(Number.isInteger(source.page_count)&&source.page_count>0)metadata.append(node('span','',source.page_count+' '+t('pages')));
+        metadata.append(node('span','',steps.length+' '+t('stepCount')),node('span','',[...parents.values()].reduce((count,ids)=>count+ids.length,0)+' '+t('relationCount')));
+        if(typeof source.sha256==='string'&&source.sha256){const hash=node('span','', 'SHA-256 '+source.sha256.slice(0,12)+'…');hash.title=t('documentHash')+': '+source.sha256;metadata.append(hash);}
+        const notes=strings(data?.notes);$('notes').hidden=!notes.length;$('notes-list').replaceChildren(...notes.map(note=>node('li','',note)));
+      }
+      function matches(step){if(!query)return true;return JSON.stringify([step.id,step.name,step.task,step.inputs,step.outputs,step.findings,step.parameters,step.algorithm,step.software]).toLocaleLowerCase().includes(query);}
+      function renderList(){
+        const results=ordered.filter(id=>matches(byId.get(id))),list=$('step-list');list.replaceChildren();$('search-status').textContent=query?results.length+' '+t('searchResults'):steps.length+' '+t('stepCount');
+        if(!results.length){list.append(node('p','empty-list',steps.length?t('noMatches'):t('noSteps')));return;}
+        for(const id of results){const step=byId.get(id),button=node('button','step-item');button.type='button';button.setAttribute('aria-pressed',String(id===selectedId));button.append(node('span','step-number',String(ordered.indexOf(id)+1).padStart(2,'0')),node('span','step-item-label',step.name));button.addEventListener('click',()=>selectStep(id));list.append(button);}
+      }
+      function section(label, content){const wrapper=node('section','detail-section');wrapper.append(node('h3','',t(label)));if(content instanceof Node)wrapper.append(content);else wrapper.append(node('p',content?'':'unreported',content||t('notReported')));return wrapper;}
+      function listContent(values){const items=strings(values);if(!items.length)return node('p','unreported',t('notReported'));const list=node('ul');list.append(...items.map(value=>node('li','',value)));return list;}
+      function evidenceCards(evidence){const wrapper=node('div');for(const entry of Array.isArray(evidence)?evidence:[]){if(!entry||typeof entry!=='object')continue;const card=node('div','evidence-card');const location=[Number.isInteger(entry.page)&&entry.page>0?t('page',{n:entry.page}):t('pageUnknown'),safeString(entry.section)||t('sectionUnknown')];card.append(node('p','evidence-location',location.join(' · ')),node('blockquote','evidence-quote',safeString(entry.quote)||t('notReported')));wrapper.append(card);}if(!wrapper.childElementCount)wrapper.append(node('p','unreported',t('notReported')));return wrapper;}
+      function populateStep(container,step,print=false){
+        const header=node(print?'div':'header','detail-header');header.append(node('p','detail-kicker',step.id),node(print?'h2':'h2','detail-title',step.name));container.append(header,section('task',safeString(step.task)));
+        const pair=node('div','flow-pair');pair.append(section('inputs',listContent(step.inputs)),section('outputs',listContent(step.outputs)));container.append(pair,section('findings',safeString(step.findings)));
+        const parameterList=node('dl');for(const entry of Array.isArray(step.parameters)?step.parameters:[]){if(!entry||typeof entry!=='object')continue;parameterList.append(node('dt','',safeString(entry.name)||'—'),node('dd','',typeof entry.value==='string'?entry.value:entry.value==null?'—':JSON.stringify(entry.value)));}container.append(section('parameters',parameterList.childElementCount?parameterList:null),section('algorithm',listContent(step.algorithm)),section('software',listContent(step.software)),section('evidence',evidenceCards(step.evidence)));
+        const dependencies=node('div');for(const parentId of parents.get(step.id)){const reason=reasonFor(step,parentId),basis=edgeBasis(step,parentId),card=node('div','dependency-card'),top=node('div','dependency-top');const label=byId.get(parentId).name;const link=node(print?'span':'button',print?'':'dependency-link',label);if(!print){link.type='button';link.addEventListener('click',()=>selectStep(parentId));}top.append(link,node('span','basis-tag '+basis,t(basis)));card.append(top,node('p','dependency-reason',safeString(reason?.reason)||t('reasonMissing')));if(Array.isArray(reason?.evidence)&&reason.evidence.length)card.append(evidenceCards(reason.evidence));dependencies.append(card);}if(!dependencies.childElementCount)dependencies.append(node('p','unreported',t('noDependencies')));container.append(section('dependencies',dependencies));
+      }
+      function renderDetails(){const detail=$('detail-panel');detail.replaceChildren();if(!selectedId){detail.append(node('h2','panel-title',t('details')),node('p','detail-empty',t('selectStep')));return;}populateStep(detail,byId.get(selectedId));}
+      function renderPrint(){const container=$('print-steps');container.replaceChildren();for(const id of ordered){const article=node('article','print-step');populateStep(article,byId.get(id),true);container.append(article);}}
+      function visibleIds(){if(!selectedId||filter==='all')return new Set(ordered);return new Set([selectedId,...(filter==='ancestors'?ancestorIds(selectedId):descendantIds(selectedId))]);}
+
+      function computeLineage(order,relations){
+        const roots=order.filter(id=>!relations.get(id).length).sort();
+        const origins=new Map();
+        for(const id of order){const input=relations.get(id);origins.set(id,input.length?[...new Set(input.flatMap(parent=>origins.get(parent)))].sort():[id]);}
+        return {roots,origins};
+      }
+      const lineagePalette=['#3585bf','#d88b31','#a07dc6','#389d84','#d6748e'];
+      function lineageColor(index){
+        if(index<lineagePalette.length)return lineagePalette[index];
+        // Generate further colors instead of cycling the first five swatches.
+        return 'hsl('+((index*137.50776405003785)%360).toFixed(6)+' 62% 52%)';
+      }
+      function lineageColors(lineage,id){return lineage.origins.get(id).map(root=>lineageColor(lineage.roots.indexOf(root)));}
+      function lineageCSS(colors){return colors.length===1?colors[0]:'linear-gradient(90deg,'+colors.join(',')+')';}
+      function lineageGradient(defs,id,colors,coordinates){
+        const gradient=svgNode('linearGradient',{id,...coordinates});
+        colors.forEach((color,index)=>gradient.append(svgNode('stop',{offset:(index/(colors.length-1))*100+'%','stop-color':color})));
+        defs.append(gradient);return 'url(#'+id+')';
+      }
+      function renderLineageLegend(lineage){
+        let legend=$('lineage-legend');if(!legend){legend=node('div');legend.id='lineage-legend';legend.className='lineage-legend';$('graph-viewport').after(legend);}
+        legend.replaceChildren();
+        for(const root of lineage.roots){const item=node('span'),swatch=node('i');swatch.style.background=lineageCSS(lineageColors(lineage,root));swatch.setAttribute('aria-hidden','true');item.append(swatch,document.createTextNode(byId.get(root).name));legend.append(item);}
+        legend.append(node('span','',language==='en'?'Merged inputs → blended outgoing arrows. Colors show provenance, not probability or weight.':'输入汇合后，后续箭头混合来源色；颜色表示来源，不表示概率或权重。'));
+      }
+      function renderGraph(){
+        graphNodes=new Map();edgeElements=[];$('node-layer').replaceChildren();$('edge-layer').replaceChildren();const visible=visibleIds();$('graph-empty').hidden=visible.size>0;$('graph-empty').textContent=t('noSteps');$('graph-controls').hidden=!visible.size;$('graph-filter').disabled=!steps.length;
+        if(!visible.size){$('graph-count').textContent='0 '+t('stepCount');return;}
+        const lineage=computeLineage(ordered,parents);renderLineageLegend(lineage);
+        const ranks=new Map(),layers=[];
+        for(const id of ordered){if(!visible.has(id))continue;const predecessors=parents.get(id).filter(parent=>visible.has(parent));const rank=predecessors.length?Math.max(...predecessors.map(parent=>ranks.get(parent)))+1:0;ranks.set(id,rank);(layers[rank]||= []).push(id);}
+        // Order each layer by its neighbors; IDs break ties so data array order is immaterial.
+        const positions=new Map();for(const layer of layers){layer.sort(compare);layer.forEach((id,index)=>positions.set(id,index));}
+        const barycenter=(id,relations)=>{const neighbors=relations.get(id).filter(neighbor=>visible.has(neighbor));return neighbors.length?neighbors.reduce((sum,neighbor)=>sum+positions.get(neighbor),0)/neighbors.length:positions.get(id);};
+        for(let pass=0;pass<3;pass++){for(let rank=1;rank<layers.length;rank++){layers[rank].sort((a,b)=>barycenter(a,parents)-barycenter(b,parents)||compare(a,b));layers[rank].forEach((id,index)=>positions.set(id,index));}for(let rank=layers.length-2;rank>=0;rank--){layers[rank].sort((a,b)=>barycenter(a,children)-barycenter(b,children)||compare(a,b));layers[rank].forEach((id,index)=>positions.set(id,index));}}
+        for(const id of ordered){if(!visible.has(id))continue;const step=byId.get(id),button=node('button','graph-node');button.type='button';button.dataset.stepId=id;const topline=node('span','node-topline');topline.append(node('span','node-id',step.id));if(!parents.get(id).length)topline.append(node('span','node-tag',t('root')));else if(!children.get(id).length)topline.append(node('span','node-tag',t('terminal')));const strip=node('span','lineage-strip');strip.style.background=lineageCSS(lineageColors(lineage,id));strip.setAttribute('aria-hidden','true');button.append(strip,topline,node('span','node-name',step.name),node('span','node-evidence',t('evidenceCount',{n:Array.isArray(step.evidence)?step.evidence.length:0})));button.setAttribute('aria-label',step.name+' · '+step.id);button.addEventListener('click',()=>selectStep(id));$('node-layer').append(button);graphNodes.set(id,{element:button,width:224,height:button.offsetHeight});}
+        const longEdges=[];for(const id of ordered){if(!visible.has(id))continue;for(const parentId of parents.get(id)){if(visible.has(parentId)&&ranks.get(id)-ranks.get(parentId)>1)longEdges.push([parentId,id]);}}
+        // Edges spanning ranks use separate rails above every node; vertical segments stay in column gutters.
+        const railHeight=longEdges.length?36+longEdges.length*12:0,verticalGap=46,columnGap=126,padding=30;
+        const layerHeights=layers.map(layer=>layer.reduce((sum,id)=>sum+graphNodes.get(id).height,0)+Math.max(0,layer.length-1)*verticalGap),maxHeight=Math.max(...layerHeights);
+        layers.forEach((layer,rank)=>{let y=padding+railHeight+(maxHeight-layerHeights[rank])/2;for(const id of layer){const item=graphNodes.get(id);item.x=padding+rank*(224+columnGap);item.y=y;item.element.style.left=item.x+'px';item.element.style.top=item.y+'px';y+=item.height+verticalGap;}});
+        graphBounds={width:padding*2+layers.length*224+(layers.length-1)*columnGap,height:padding*2+railHeight+maxHeight};$('graph-stage').style.width=graphBounds.width+'px';$('graph-stage').style.height=graphBounds.height+'px';const svg=$('edge-layer');svg.setAttribute('width',graphBounds.width);svg.setAttribute('height',graphBounds.height);
+        const defs=svgNode('defs');svg.append(defs);
+        for(const targetId of ordered){if(!visible.has(targetId))continue;for(const sourceId of parents.get(targetId)){if(!visible.has(sourceId))continue;const source=graphNodes.get(sourceId),target=graphNodes.get(targetId),sx=source.x+source.width,sy=source.y+source.height/2,tx=target.x,ty=target.y+target.height/2;let path;
+          if(ranks.get(targetId)-ranks.get(sourceId)>1){const railIndex=longEdges.findIndex(edge=>edge[0]===sourceId&&edge[1]===targetId),railY=padding+railIndex*12,offset=22+(railIndex%5)*7;path=`M ${sx} ${sy} H ${sx+offset} V ${railY} H ${tx-offset} V ${ty} H ${tx-2}`;}
+          else{const middle=(sx+tx)/2;path=`M ${sx} ${sy} H ${middle} V ${ty} H ${tx-2}`;}
+          const colors=lineageColors(lineage,sourceId),edgeId='lineage-edge-'+edgeElements.length,markerId=edgeId+'-arrow';
+          const paint=colors.length===1?colors[0]:lineageGradient(defs,edgeId,colors,{gradientUnits:'userSpaceOnUse',x1:sx,y1:sy,x2:tx,y2:ty});
+          const arrowPaint=colors.length===1?colors[0]:lineageGradient(defs,edgeId+'-tip',colors,{x1:'0%',y1:'0%',x2:'0%',y2:'100%'});
+          const marker=svgNode('marker',{id:markerId,viewBox:'0 0 8 8',refX:7,refY:4,markerWidth:8,markerHeight:8,orient:'auto',markerUnits:'userSpaceOnUse'});
+          const tip=svgNode('path',{d:'M 0 0 L 8 4 L 0 8 z'});tip.style.fill=arrowPaint;marker.append(tip);defs.append(marker);
+          const basis=edgeBasis(byId.get(targetId),sourceId),element=svgNode('path',{d:path,class:'edge '+basis,'marker-end':'url(#'+markerId+')'});element.style.stroke=paint;element.dataset.origins=lineage.origins.get(sourceId).join(',');svg.append(element);edgeElements.push({element,sourceId,targetId,basis});}}
+        $('graph-count').textContent=visible.size+' '+t('stepCount')+' · '+edgeElements.length+' '+t('relationCount');updateHighlights();showReadableView();
+      }
+      function updateHighlights(){const upstream=selectedId?ancestorIds(selectedId):new Set(),downstream=selectedId?descendantIds(selectedId):new Set();for(const [id,item] of graphNodes){item.element.classList.toggle('is-selected',id===selectedId);item.element.classList.toggle('is-upstream',upstream.has(id));item.element.classList.toggle('is-downstream',downstream.has(id));item.element.classList.toggle('is-muted',!!selectedId&&id!==selectedId&&!upstream.has(id)&&!downstream.has(id));item.element.classList.toggle('search-dim',!!query&&!matches(byId.get(id)));item.element.setAttribute('aria-pressed',String(id===selectedId));}for(const edge of edgeElements){const isUp=(upstream.has(edge.sourceId)&&upstream.has(edge.targetId))||(upstream.has(edge.sourceId)&&edge.targetId===selectedId),isDown=(downstream.has(edge.sourceId)&&downstream.has(edge.targetId))||(edge.sourceId===selectedId&&downstream.has(edge.targetId));edge.element.classList.toggle('is-upstream',isUp);edge.element.classList.toggle('is-downstream',isDown);edge.element.classList.toggle('is-muted',!!selectedId&&!isUp&&!isDown);}}
+      function selectStep(id){if(!byId.has(id))return;const wasSelected=selectedId;selectedId=id;renderList();renderDetails();if(filter!=='all'&&wasSelected!==id)renderGraph();else{updateHighlights();revealSelected();}updateAgentUI();$('selection-status').textContent=t('selected')+byId.get(id).name;}
+      function applyTransform(){$('graph-stage').style.transform=`translate(${transform.x}px,${transform.y}px) scale(${transform.scale})`;$('zoom-label').textContent=Math.round(transform.scale*100)+'%';}
+      function fitGraph(){if(!graphNodes.size)return;const viewport=$('graph-viewport'),width=viewport.clientWidth,height=viewport.clientHeight;if(!width||!height)return;const scale=Math.min(1.15,(width-48)/graphBounds.width,(height-72)/graphBounds.height);transform={x:(width-graphBounds.width*scale)/2,y:(height-graphBounds.height*scale)/2-10,scale:Math.max(.02,scale)};applyTransform();}
+      // A full overview can make labels unreadable. Automatic framing keeps text at
+      // least 11 px (13 px × .85); the Fit action deliberately shows the whole DAG.
+      const minimumReadableScale=.85;
+      function focusSelected(scale){
+        const item=graphNodes.get(selectedId)||graphNodes.values().next().value;if(!item)return;
+        const viewport=$('graph-viewport'),width=viewport.clientWidth,height=viewport.clientHeight;
+        const left=parents.get(selectedId)?.length?(width-item.width*scale)/2:Math.min(32,(width-item.width*scale)/2);
+        transform={x:left-item.x*scale,y:12+(height-76-item.height*scale)/2-item.y*scale,scale};applyTransform();
+      }
+      function showReadableView(){
+        if(!graphNodes.size)return;const viewport=$('graph-viewport');
+        const overviewScale=Math.min(1.15,(viewport.clientWidth-48)/graphBounds.width,(viewport.clientHeight-72)/graphBounds.height);
+        if(overviewScale>=minimumReadableScale)fitGraph();else focusSelected(minimumReadableScale);
+      }
+      function revealSelected(){
+        const item=graphNodes.get(selectedId);if(!item)return;const viewport=$('graph-viewport'),scale=Math.max(minimumReadableScale,transform.scale);
+        const left=item.x*scale+transform.x,top=item.y*scale+transform.y;
+        if(scale===transform.scale&&left>=20&&top>=20&&left+item.width*scale<=viewport.clientWidth-20&&top+item.height*scale<=viewport.clientHeight-64)return;
+        focusSelected(scale);
+      }
+      function zoom(factor,clientX,clientY){if(!graphNodes.size)return;const viewport=$('graph-viewport'),rect=viewport.getBoundingClientRect(),x=clientX==null?viewport.clientWidth/2:clientX-rect.left,y=clientY==null?viewport.clientHeight/2:clientY-rect.top;const scale=Math.max(.02,Math.min(3,transform.scale*factor)),ratio=scale/transform.scale;transform={x:x-(x-transform.x)*ratio,y:y-(y-transform.y)*ratio,scale};applyTransform();}
+      function isPDFPath(value){
+        if(typeof value!=='string'||!value.toLowerCase().endsWith('.pdf'))return false;
+        const slash=String.fromCharCode(92),drive=value.length>3&&'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.includes(value[0].toUpperCase())&&value[1]===':'&&[slash,'/'].includes(value[2]);
+        return value.startsWith('/')||value.startsWith(slash+slash)||drive;
+      }
+      function pdfName(path){return path.replaceAll(String.fromCharCode(92),'/').split('/').pop();}
+      function bridgeURL(){
+        try{const url=new URL($('agent-url').value.trim());if(url.protocol!=='http:'||!['127.0.0.1','localhost','[::1]'].includes(url.hostname)||url.username||url.password||url.search||url.hash||url.pathname!=='/')return null;return url.origin;}catch{return null;}
+      }
+      function draftPDF(){
+        if(document.querySelector('input[name="agent-pdf-mode"]:checked').value==='path'){const path=$('agent-pdf-path').value.trim();return isPDFPath(path)?{kind:'path',path,name:pdfName(path)}:null;}
+        const file=$('agent-pdf-file').files[0];return file&&file.name.toLowerCase().endsWith('.pdf')&&file.size<=25*1024*1024?{kind:'file',file,name:file.name}:null;
+      }
+      const nodeConversations=new Map();
+      const pdfFileIds=new WeakMap();let nextPDFFileId=0;
+      function conversationKey(id=selectedId,binding=pdfBinding){
+        let pdfIdentity=null;
+        if(binding?.kind==='file'){
+          if(!pdfFileIds.has(binding.file))pdfFileIds.set(binding.file,++nextPDFFileId);
+          pdfIdentity=['file',pdfFileIds.get(binding.file)];
+        }else if(binding?.kind==='path')pdfIdentity=['path',binding.path];
+        const source=data?.source||{};
+        return JSON.stringify([[source.kind,source.name,source.page_count,source.sha256,source.pdf_path],id,pdfIdentity]);
+      }
+      function currentConversation(){return nodeConversations.get(conversationKey())||[];}
+      function updateAgentUI(){
+        const step=byId.get(selectedId),question=$('agent-question').value.trim();$('agent-node-context').textContent=step?t('agentCurrent',{name:step.name,id:step.id}):t('agentNoNode');
+        $('agent-connect').disabled=askPending||connectPhase==='connecting'||!bridgeURL()||!$('agent-token').value.trim();
+        $('agent-connection-status').dataset.state=connectPhase;
+        $('agent-connection-status').textContent=!bridgeURL()?t('agentURLHint'):connectPhase==='connecting'?t('agentConnecting'):connectPhase==='connected'?t('agentConnected'):connectPhase==='error'?t('agentConnectError',{error:connectError}):t('agentDisconnected');
+        $('agent-pdf-binding').textContent=pdfBinding?t(pdfBinding.kind==='path'?'agentBound':'agentFileBound',{name:pdfBinding.name}):t(data?.source?.kind==='demo'?'agentDemoUnbound':'agentUnbound');
+        $('agent-bound-details').hidden=!pdfBinding||pdfBinding.kind!=='path';$('agent-bound-path').textContent=pdfBinding?.path||'';
+        $('agent-relocate').hidden=!!pdfBinding&&pdfBinding.kind==='path'&&!relocationOpen;$('agent-relocate').disabled=askPending;$('agent-relocation').hidden=!relocationOpen;
+        const pathMode=document.querySelector('input[name="agent-pdf-mode"]:checked').value==='path';$('agent-path-field').hidden=!pathMode;$('agent-file-field').hidden=pathMode;$('agent-bind-pdf').disabled=askPending||!draftPDF();
+        for(const id of ['agent-url','agent-token','agent-pdf-path','agent-pdf-file','agent-question'])$(id).disabled=askPending;
+        for(const input of document.querySelectorAll('input[name="agent-pdf-mode"]'))input.disabled=askPending;
+        $('agent-send').disabled=askPending||!step||!question||!pdfBinding||!bridgeConnection;
+        const turns=currentConversation();
+        $('agent-followup').textContent=language==='en'?'Follow up':'追问';
+        $('agent-followup').disabled=$('agent-send').disabled||!turns.length;
+        $('agent-followup').title=language==='en'?'Include previous questions and answers for this step':'携带当前节点此前的问答';
+        let conversationHint=$('agent-conversation-hint');
+        if(!conversationHint){conversationHint=node('p');conversationHint.id='agent-conversation-hint';$('agent-form-hint').after(conversationHint);}
+        conversationHint.textContent=language==='en'?`${turns.length} completed turns for this step. Follow up includes them; Ask Codex starts a new topic. History lasts until this page is reloaded.`:`当前节点已有 ${turns.length} 轮问答。“追问”携带这些问答；“提问”开始新话题。记录保留至本页刷新。`;
+        $('agent-export').disabled=askPending||!step||!question||pdfBinding?.kind!=='path';
+        $('agent-form-hint').textContent=!step?t('agentNoNode'):!pdfBinding?t(pathMode?'agentPathHint':'agentFileHint'):!question?t('agentQuestionHint'):pdfBinding.kind==='file'?t('agentFileExportHint'):!bridgeConnection?t('agentConnectHint'):t('agentReadyHint');
+        $('agent-job-status').dataset.state=jobPhase;
+        $('agent-job-status').textContent=jobPhase==='running'?t('agentRunning',requestSnapshot):jobPhase==='completed'?t('agentCompleted'):jobPhase==='error'?t('agentJobError',{error:jobError}):'';
+        $('agent-answer').hidden=lastAnswer===null;if(lastAnswer!==null){$('agent-answer-context').textContent=t('agentAnswerContext',requestSnapshot);$('agent-answer-text').textContent=lastAnswer;}
+        $('agent-answer').hidden=lastAnswer===null||requestSnapshot?.conversationId!==conversationKey();
+        $('agent-job-status').hidden=!!requestSnapshot&&requestSnapshot.conversationId!==conversationKey();
+        let transcript=$('agent-conversation');if(!transcript){transcript=node('div');transcript.id='agent-conversation';$('agent-answer').after(transcript);}
+        transcript.replaceChildren();
+        for(const [index,turn] of turns.entries()){
+          const item=node('details'),title=node('summary');title.textContent=(language==='en'?'Turn ':'第 ')+(index+1)+(language==='en'?'':' 轮')+' · '+turn.question;
+          const answer=node('p');answer.style.whiteSpace='pre-wrap';answer.textContent=turn.answer;item.append(title,answer);transcript.append(item);
+        }
+      }
+      function toggleAgentDrawer(open){$('agent-drawer').hidden=!open;$('agent-open').setAttribute('aria-expanded',String(open));if(open){updateAgentUI();$('agent-close').focus();}else $('agent-open').focus();}
+      async function bridgeJSON(connection,path,options={}){
+        const response=await fetch(connection.url+path,{method:options.method||'GET',headers:{Authorization:'Bearer '+connection.token,...(options.body?{'Content-Type':'application/json'}:{})},body:options.body?JSON.stringify(options.body):undefined,signal:options.signal});
+        let result;try{result=await response.json();}catch{throw new Error(t('agentInvalidResponse'));}
+        if(!response.ok)throw new Error(typeof result.error==='string'?result.error:'HTTP '+response.status);return result;
+      }
+      async function connectAgent(){
+        const url=bridgeURL(),token=$('agent-token').value.trim();if(!url||!token||askPending)return;
+        const attempt=++connectAttempt,controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);connectPhase='connecting';connectError='';bridgeConnection=null;updateAgentUI();
+        try{const result=await bridgeJSON({url,token},'/health',{signal:controller.signal});if(attempt!==connectAttempt)return;if(result.ready!==true||result.agent!=='codex')throw new Error(t('agentInvalidResponse'));bridgeConnection={url,token};connectPhase='connected';}
+        catch(error){if(attempt!==connectAttempt)return;connectPhase='error';connectError=error.name==='TypeError'||error.name==='AbortError'?t('agentConnectHelp'):error.message;}
+        finally{clearTimeout(timeout);updateAgentUI();}
+      }
+      function readPDF(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(new Error(t('agentFileError')));reader.readAsDataURL(file);});}
+      function downloadAgentRequest(){
+        const question=$('agent-question').value.trim();if(!selectedId||!question||pdfBinding?.kind!=='path')return;
+        const request={workflow:data,node_id:selectedId,question,pdf:{path:pdfBinding.path}},url=URL.createObjectURL(new Blob([JSON.stringify(request,null,2)+'\n'],{type:'application/json;charset=utf-8'})),anchor=node('a');anchor.href=url;anchor.download='codex-request-'+selectedId.replace(/[^a-zA-Z0-9_-]/g,'_')+'.json';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+      }
+      async function askAgent(event, followup=false){
+        event.preventDefault();const question=$('agent-question').value.trim(),step=byId.get(selectedId);if(askPending||!bridgeConnection||!pdfBinding||!step||!question)return;
+        const conversationId=conversationKey(),history=followup?currentConversation().map(turn=>({...turn})):[];
+        if(followup&&!history.length)return;
+        const workflow=data,connection={...bridgeConnection},binding={...pdfBinding},controller=new AbortController();requestSnapshot={id:step.id,name:step.name,pdf:binding.path||binding.name,conversationId};askPending=true;jobPhase='running';jobError='';lastAnswer=null;updateAgentUI();
+        const timeout=setTimeout(()=>controller.abort(),330000);
+        try{
+          const pdf=binding.kind==='path'?{path:binding.path}:{name:binding.name,data_base64:await readPDF(binding.file)};
+          const result=await bridgeJSON(connection,'/ask',{method:'POST',body:{workflow,node_id:requestSnapshot.id,question,pdf,history},signal:controller.signal});
+          if(typeof result.job_id!=='string'||!result.job_id)throw new Error(t('agentInvalidResponse'));
+          while(true){
+            await new Promise(resolve=>setTimeout(resolve,1000));if(controller.signal.aborted)throw new DOMException('Timeout','AbortError');
+            const job=await bridgeJSON(connection,'/jobs/'+encodeURIComponent(result.job_id),{signal:controller.signal});
+            if(job.status==='running')continue;if(job.status==='error')throw new Error(safeString(job.error)||t('agentInvalidResponse'));if(job.status!=='completed')throw new Error(t('agentInvalidResponse'));
+            if(typeof job.answer!=='string'||!job.answer.trim())throw new Error(t('agentEmptyAnswer'));
+            lastAnswer=job.answer;jobPhase='completed';nodeConversations.set(conversationId,[...history,{question,answer:lastAnswer}]);$('agent-question').value='';break;
+          }
+        }catch(error){jobPhase='error';jobError=error.name==='AbortError'?t('agentTimeout'):error.name==='TypeError'?t('agentConnectHelp'):error.message;const message=String(error.message).toLowerCase();if(message.includes('pdf')&&['path','not found','does not exist','missing','sha','hash','match'].some(fragment=>message.includes(fragment))){pdfBinding=null;relocationOpen=true;jobError+=' '+t('agentPathLost');}}
+        finally{clearTimeout(timeout);askPending=false;updateAgentUI();}
+      }
+      function renderFailure(){renderMetadata();$('workspace').hidden=true;$('download-button').disabled=true;$('print-button').disabled=true;$('agent-open').disabled=true;$('error-box').hidden=false;$('error-title').textContent=t('errorTitle');$('error-message').textContent=t(translations[language][failure]?failure:'errorMessage');}
+      function renderAll(){applyLanguage();if(failure){renderFailure();return;}renderMetadata();renderList();renderDetails();renderPrint();renderGraph();}
+      $('language-button').addEventListener('click',()=>{const alternative=language==='zh'?'en':'zh';if(!localizedWorkflows[alternative])return;language=alternative;query='';$('search-input').value='';renderAll();});
+      $('agent-open').addEventListener('click',()=>toggleAgentDrawer($('agent-drawer').hidden));$('agent-close').addEventListener('click',()=>toggleAgentDrawer(false));$('agent-drawer').addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();toggleAgentDrawer(false);}});
+      for(const id of ['agent-url','agent-token'])$(id).addEventListener('input',()=>{connectAttempt++;bridgeConnection=null;connectPhase='idle';connectError='';updateAgentUI();});
+      for(const id of ['agent-pdf-path','agent-pdf-file','agent-question'])$(id).addEventListener('input',updateAgentUI);
+      for(const input of document.querySelectorAll('input[name="agent-pdf-mode"]'))input.addEventListener('change',updateAgentUI);
+      $('agent-relocate').addEventListener('click',()=>{relocationOpen=true;updateAgentUI();$('agent-pdf-path').focus();});
+      $('agent-bind-pdf').addEventListener('click',()=>{const binding=draftPDF();if(!binding||askPending)return;pdfBinding=binding;relocationOpen=false;if(jobPhase==='error'){jobPhase='idle';jobError='';}updateAgentUI();});
+      $('agent-connect').addEventListener('click',connectAgent);$('agent-form').addEventListener('submit',askAgent);$('agent-followup').addEventListener('click',event=>askAgent(event,true));$('agent-export').addEventListener('click',downloadAgentRequest);
+      $('theme-button').addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+      $('search-input').addEventListener('input',event=>{query=event.target.value.trim().toLocaleLowerCase();renderList();updateHighlights();});
+      $('graph-filter').addEventListener('change',event=>{filter=event.target.value;renderGraph();});
+      $('zoom-in').addEventListener('click',()=>zoom(1.25));$('zoom-out').addEventListener('click',()=>zoom(.8));$('fit-button').addEventListener('click',fitGraph);
+      const viewport=$('graph-viewport');
+      viewport.addEventListener('wheel',event=>{
+        if(event.target.closest('.graph-controls'))return;
+        event.preventDefault();
+        const unit=event.deltaMode===1?16:event.deltaMode===2?viewport.clientHeight:1;
+        const dx=event.deltaX*unit,dy=event.deltaY*unit;
+        if(dx!==0||event.shiftKey){
+          const horizontal=dx!==0?dx:dy;
+          transform.x-=Math.max(-160,Math.min(160,horizontal));applyTransform();return;
+        }
+        zoom(Math.exp(-Math.max(-48,Math.min(48,dy))*.001),event.clientX,event.clientY);
+      },{passive:false});
+      let drag=null;viewport.addEventListener('pointerdown',event=>{if(event.button!==0||event.target.closest('button'))return;event.preventDefault();drag={id:event.pointerId,x:event.clientX,y:event.clientY,startX:transform.x,startY:transform.y};viewport.setPointerCapture(event.pointerId);viewport.classList.add('dragging');});viewport.addEventListener('pointermove',event=>{if(!drag||event.pointerId!==drag.id)return;transform.x=drag.startX+event.clientX-drag.x;transform.y=drag.startY+event.clientY-drag.y;applyTransform();});const endDrag=()=>{drag=null;viewport.classList.remove('dragging');};viewport.addEventListener('pointerup',endDrag);viewport.addEventListener('pointercancel',endDrag);viewport.addEventListener('lostpointercapture',endDrag);
+      viewport.addEventListener('keydown',event=>{if(event.target.closest('.graph-controls'))return;const moves={ArrowLeft:[45,0],ArrowRight:[-45,0],ArrowUp:[0,45],ArrowDown:[0,-45]};if(event.key==='+'||event.key==='='){event.preventDefault();zoom(1.25);}else if(event.key==='-'){event.preventDefault();zoom(.8);}else if(event.key==='0'){event.preventDefault();fitGraph();}else if(moves[event.key]){event.preventDefault();transform.x+=moves[event.key][0];transform.y+=moves[event.key][1];applyTransform();}else if(event.key==='Escape'){filter='all';$('graph-filter').value='all';query='';$('search-input').value='';renderList();renderGraph();}});
+      $('download-button').addEventListener('click',()=>{if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=node('a');anchor.href=url;anchor.download=(safeString(data.paper_title).replace(/[<>:"/\\|?*\u0000-\u001f]/g,'').trim().slice(0,90)||'paper2flow')+'.json';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+      $('print-button').addEventListener('click',()=>window.print());let beforePrintTransform=null,isPrinting=false;window.addEventListener('beforeprint',()=>{isPrinting=true;beforePrintTransform={...transform};fitGraph();});window.addEventListener('afterprint',()=>{isPrinting=false;if(beforePrintTransform){transform=beforePrintTransform;beforePrintTransform=null;applyTransform();}});
+      let resizeTimer=null;const reframe=()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(!isPrinting)showReadableView();},80);};if(typeof ResizeObserver!=='undefined')new ResizeObserver(reframe).observe(viewport);else window.addEventListener('resize',reframe);
+      try{let stored=null;try{stored=localStorage.getItem('paper2flow-theme');}catch{}setTheme(stored==='dark'||stored!=='light'&&window.matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light');data=JSON.parse($('workflow-data').textContent);localizedWorkflows=JSON.parse($('workflow-localizations').textContent);if(!localizedWorkflows[language])throw new Error('schemaError');validate();}catch(error){failure=error.message in translations.zh?error.message:'errorMessage';}
+      renderAll();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "paper2flow",
+  "description": "Source-grounded experimental and analytical dependencies. Four to ten steps is a recommendation, not a limit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "paper_title", "summary", "source", "steps", "notes"],
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["1.0"]},
+    "paper_title": {"type": "string", "minLength": 1},
+    "summary": {"type": "string"},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "kind", "page_count", "sha256"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "enum": ["pdf", "text", "markdown", "legacy", "demo"]},
+        "page_count": {"type": ["integer", "null"], "minimum": 1},
+        "sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "pdf_path": {"type": ["string", "null"], "minLength": 1, "description": "Optional absolute local path to the original PDF, carried from extraction for automatic reuse by the Codex bridge."}
+      }
+    },
+    "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "strings": {"type": "array", "items": {"type": "string"}},
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["page", "section", "quote"],
+      "properties": {
+        "page": {"type": ["integer", "null"], "minimum": 1},
+        "section": {"type": "string"},
+        "quote": {"type": "string"}
+      }
+    },
+    "parameter": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "value"],
+      "properties": {"name": {"type": "string", "minLength": 1}, "value": {"type": "string"}}
+    },
+    "dependency_reason": {
+      "type": "object", "additionalProperties": false,
+      "required": ["step_id", "basis", "reason", "evidence"],
+      "properties": {
+        "step_id": {"type": "string", "minLength": 1},
+        "basis": {"type": "string", "enum": ["explicit", "inferred"]},
+        "reason": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}
+      }
+    },
+    "step": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "name", "task", "inputs", "outputs", "parameters", "findings", "algorithm", "software", "depends_on", "evidence", "dependency_reasons"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "task": {"type": "string", "minLength": 1},
+        "inputs": {"$ref": "#/$defs/strings"},
+        "outputs": {"$ref": "#/$defs/strings"},
+        "parameters": {"type": "array", "items": {"$ref": "#/$defs/parameter"}},
+        "findings": {"type": ["string", "null"]},
+        "algorithm": {"$ref": "#/$defs/strings"},
+        "software": {"$ref": "#/$defs/strings"},
+        "depends_on": {"$ref": "#/$defs/strings"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "dependency_reasons": {"type": "array", "items": {"$ref": "#/$defs/dependency_reason"}}
+      }
+    }
+  }
+}

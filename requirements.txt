@@ -1,0 +1,2 @@
+# Required for PDF extraction and PDF-backed node questions.
+pypdf
