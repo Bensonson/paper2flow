@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="328" viewBox="0 0 580 328" role="img" aria-labelledby="title desc">
+  <title id="title">How paper2flow builds a report and answers questions</title>
+  <desc id="desc">Follow the left column down to the report. On the right, a question and its history go to the local Codex CLI with the original PDF. The answer returns to the report.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#436660"/>
+    </marker>
+  </defs>
+  <rect width="580" height="328" rx="12" fill="#fafcfb"/>
+  <g fill="none" stroke="#436660" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M128 63v28"/><path d="M128 147v28"/><path d="M128 231v28"/>
+    <path d="M240 288h72"/><path d="M428 260v-28"/><path d="M428 176v-28"/>
+    <path d="M540 120h24v168h-22"/>
+  </g>
+  <g fill="#fff" stroke="#83a29b">
+    <rect x="16" y="8" width="224" height="55" rx="8"/>
+    <rect x="16" y="92" width="224" height="55" rx="8"/>
+    <rect x="16" y="176" width="224" height="55" rx="8"/>
+    <rect x="16" y="260" width="224" height="55" rx="8"/>
+    <rect x="316" y="260" width="224" height="55" rx="8" fill="#d9eee8"/>
+    <rect x="316" y="176" width="224" height="55" rx="8"/>
+    <rect x="316" y="92" width="224" height="55" rx="8"/>
+  </g>
+  <g text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#183b33">
+    <text x="128" y="41">Original paper</text>
+    <text x="128" y="115">Codex reconstructs<tspan x="128" dy="20">the methods</tspan></text>
+    <text x="128" y="199">Structured workflow<tspan x="128" dy="20">with source evidence</tspan></text>
+    <text x="128" y="293">Validate and render</text>
+    <text x="428" y="283">Interactive<tspan x="428" dy="20">bilingual report</tspan></text>
+    <text x="428" y="199">Step question and<tspan x="428" dy="20">conversation history</tspan></text>
+    <text x="428" y="115">Local Codex CLI<tspan x="428" dy="20">with the original PDF</tspan></text>
+  </g>
+</svg>

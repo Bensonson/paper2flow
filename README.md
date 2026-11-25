@@ -25,16 +25,7 @@ Use it to understand a paper, inspect its evidence, and plan your next research 
 
 ## Workflow design
 
-```mermaid
-flowchart LR
-    A[Original paper] --> B[Codex: reconstruct methods]
-    B --> C[Structured workflow with evidence]
-    C --> D[Validate and render]
-    D --> E[Interactive bilingual report]
-    E --> F[Node question and conversation history]
-    F --> G[Local Codex CLI with original PDF]
-    G --> E
-```
+![Codex reconstructs methods from the paper, records their evidence, and renders a bilingual report. Questions about each step go to the local Codex CLI with the original PDF and conversation history. Answers return to the report.](assets/workflow-design-en.svg)
 
 The project combines four pieces of research-agent engineering:
 
